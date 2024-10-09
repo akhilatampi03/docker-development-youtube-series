@@ -1,16 +1,76 @@
-bases:
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:  # Change from 'bases' to 'resources'
   - ../../application
-patches:
-  - replica_count.yaml
-  - resource_limits.yaml
+
+patches:  # Change from 'patchesStrategicMerge' to 'patches'
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: your-deployment-name  # Change to your actual deployment name
+    path: replica_count.yaml
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: your-other-deployment-name  # Change to your actual deployment name
+    path: resource_limits.yaml
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: your-env-deployment-name  # Change to your actual deployment name
+    path: env.yaml
+
 configMapGenerator:
-- name: example-config
-  namespace: example
-  #behavior: replace
-  files:
-    - configs/config.json
-patchesStrategicMerge:
-  - env.yaml
+  - name: example-config
+    namespace: example
+    # behavior: replace  # Uncomment if you want to use replace behavior
+    files:
+      - configs/config.json
+
 images:
-- name: aimvector/python
-  newTag: 1.0.1
+  - name: aimvector/python
+    newTag: 1.0.1
+ # Correct apiVersion
+kind: Kustomization
+
+resources:  # Change from 'bases' to 'resources'
+  - ../../application
+
+patches:  # Change from 'patchesStrategicMerge' to 'patches'
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: your-deployment-name  # Change to your actual deployment name
+    path: replica_count.yaml
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: your-other-deployment-name  # Change to your actual deployment name
+    path: resource_limits.yaml
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: your-env-deployment-name  # Change to your actual deployment name
+    path: env.yaml
+
+configMapGenerator:
+  - name: example-config
+    namespace: example
+    # behavior: replace  # Uncomment if you want to use replace behavior
+    files:
+      - configs/config.json
+
+images:
+  - name: aimvector/python
+    newTag: 1.0.1

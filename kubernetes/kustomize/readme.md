@@ -24,7 +24,7 @@ kubectl delete ns example
 ```
 kubectl kustomize .\kubernetes\kustomize\ | kubectl apply -f -
 # OR
-kubectl apply -k .\kubernetes\kustomize\
+kubectl apply -k ./kubernetes/kustomize/application/
 
 kubectl delete ns example
 ```
@@ -34,7 +34,7 @@ kubectl delete ns example
 ```
 kubectl kustomize .\kubernetes\kustomize\environments\production | kubectl apply -f -
 # OR
-kubectl apply -k .\kubernetes\kustomize\environments\production
+kubectl apply -k ./kubernetes/kustomize/environments/production
 
 kubectl delete ns example
 ```

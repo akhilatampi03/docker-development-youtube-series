@@ -1,4 +1,4 @@
 {
-    "environment" : "prod",
+    "environment" : "prod-ca",
     "hello": "world"
 }
